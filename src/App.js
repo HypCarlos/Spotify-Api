@@ -29,6 +29,30 @@ function App() {
     .then(data => setAccessToken(data.access_token))
   },[])
 
+
+  //SEARCH
+  // ASYNC MAKE SOME FUNCTIONS WAIT ITS TURN
+  async function search() {
+    console.log("Search for " + searchInput);
+
+    var artistParameters = {
+      method: `GET`,
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization': 'Bearer ' + accessToken
+      }
+    }
+    var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', artistParameters)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    // GET REQUEST TO GET ARTIST ID
+
+    // WITH ARTIST ID GET ALBUMS 
+
+
+    // DISPLAY ALBUMS
+  }
+
   return (
     <div className="App">
     
@@ -41,7 +65,7 @@ function App() {
           type= 'input'
           onKeyPress={event => {
             if (event.key === "Enter") {
-              console.log("ENTER");
+              search();
             }
           }}
        onChange= {(event) => setSearchInput(event.target.value)}
