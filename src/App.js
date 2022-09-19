@@ -11,6 +11,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   // GETTING TOKEN AFTER USEEFFECT AND THEN USING STATE TO SAVE IT
   const [accessToken, setAccessToken] = useState("");
+  const [albums, setAlbums] = useState([]);
   
 
 
@@ -35,30 +36,43 @@ function App() {
   async function search() {
     console.log("Search for " + searchInput);
 
-    var artistParameters = {
-      method: `GET`,
+// GET REQUEST TO GET ARTIST ID
+
+    var searchParameters = {
+      method: 'GET',
       headers: {
         'Content-Type' : 'application/json',
         'Authorization': 'Bearer ' + accessToken
       }
     }
-    var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', artistParameters)
+    var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
     .then(response => response.json())
-    .then(data => console.log(data))
-    // GET REQUEST TO GET ARTIST ID
+    .then(data => { return data.artists.items[0].id }) // ARTIST ID
+
+
+    console.log("artist id " + artistID);
+    
 
     // WITH ARTIST ID GET ALBUMS 
+    var returnedAlbums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
+    // HANDLES RESPONSE OF WHAT FETCH RETURNS
+    .then( response => response.json())
+    .then (data => {
+      console.log(data);
 
-
+      setAlbums(data.items);
+    });
     // DISPLAY ALBUMS
   }
+
+  console.log(albums);
 
   return (
     <div className="App">
     
     
     <Container>
-    <h1>SPOTIFY API</h1>
+    <a href='/' style={{color: "black", textDecoration: "none"}}><h1>SPOTIFY API</h1></a>
       <InputGroup className='mb-3' size= 'lg'>
         <FormControl 
           placeholder='Search Artists'
@@ -70,21 +84,26 @@ function App() {
           }}
        onChange= {(event) => setSearchInput(event.target.value)}
         />
-      <Button onClick = {() => {console.log("clicked button")}}>Search</Button>
+      <Button onClick = {() => search()}>Search</Button>
        
       </InputGroup>
     </Container>
 
     <Container>
     <Row className='mx-2 row row-cols-4'>
-    <Card>
-        <Card.Img src = '#'/>
+    {albums.map((album, i) => {
+        return (
+          <Card>
+       <a href= {album.external_urls.spotify}> <Card.Img src = {album.images[0].url} alt= {album.name}/> </a>
         <Card.Body>
           <Card.Title>
-            Album name
+            {album.name}
           </Card.Title>
         </Card.Body>
       </Card>
+        )
+    })}
+   
 
   
     </Row>
