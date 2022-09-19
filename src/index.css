@@ -4,11 +4,6 @@ body {
   font-weight: 100;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
-
 @font-face {
   font-family: "VCR";
   src: url(../src/assets/fonts/VCR_OSD_MONO_1.001.ttf);
