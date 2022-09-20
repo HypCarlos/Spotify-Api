@@ -1,6 +1,8 @@
 # Spotify Api
 
-![image](https://user-images.githubusercontent.com/66544442/191354303-16ae24c6-e72d-437f-b4fb-eac5d6f9c4d6.png)
+Simple album search using Spotify Api
+
+![image](https://user-images.githubusercontent.com/66544442/191354476-967cf0c6-c395-488e-abed-9c57067430c6.png)
 
 
 # Getting Started with Create React App
