@@ -1,3 +1,8 @@
+# Spotify Api
+
+![image](https://user-images.githubusercontent.com/66544442/191354303-16ae24c6-e72d-437f-b4fb-eac5d6f9c4d6.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
