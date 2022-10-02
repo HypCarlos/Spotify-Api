@@ -3,8 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
 import { useState, useEffect } from "react";
 
-const CLIENT_ID = "324e5602e5dd4c5a8f75c594f274413c";
-const CLIENT_SECRET = "630c21c1010f46889dbd5904df0a2b50";
+
+
+const CLIENT_ID = (process.env.REACT_APP_API_KEY);
+const CLIENT_SECRET = (process.env.REACT_APP_API_SECRET);
 
 function App() {
 
